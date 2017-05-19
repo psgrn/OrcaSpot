@@ -1,0 +1,36 @@
+DONE - Color code markers based on how recent they are
+DONE - Change size of marker based on how recent they are
+DONE - Make variable radius definition for recent map
+DONE - Limit pulled posts to 10 days
+DONE - LimitTo broke auto updating/fade-in of new results 
+DONE - Limiting list to only what is in view
+DONE - Remove default controls from recentMap
+DONE - Limit markers to only what is in view
+DONE - InfoWindow is broken
+DONE - Info window buggy - when marker clicked page shifts to it and info window dissappears.
+DONE - Allow manual specification of location when entering a sighting (set pin as default to their location, and let them move it)
+
+- Login page should display log out button if already logged in
+- report sighting page should redirect to login if user is not logged in
+
+
+
+Error checking on firebase read/write stuff
+
+
+NOTES
+---------------------------------------------------------------------------------------------
+- Circle.getBounds gives SouthWest and NorthEast coordinates, effectively a square
+- At the moment, when map bounds are changed, the dom is completely regenerated. Ideally, only new items would be added and now out of view items
+  would be removed. Though the problem I had with this is the following: When viewing a recent sighting and expanding view to be more inclusive, 
+  the original sighting is pushed to bottom of the list even though it is still the most recent. I was able to accomplish this (minus the ability 
+  to sort properly) by putting a check after the inBounds check to see if the dom element exists. Same happens with markers.
+
+HOW RESULTS/BOUNDS SHOULD WORK
+1. User location is determined and becomes center
+2. User-defined radius is determined to create circle
+3. Circle is used as map-BOUNDS
+4. query last x days of results
+5. if result is within map bounds, add markers and display list
+6. when bounds are changed (map moved, zoomed, or circle changed), update list and markers
+
